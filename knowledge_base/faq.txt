@@ -1,0 +1,22 @@
+TechMart Electronics - Frequently Asked Questions
+
+Q: What is TechMart?
+A: TechMart Electronics is an online electronics retailer selling laptops, smartphones, tablets, accessories, and smart home devices.
+
+Q: How do I contact TechMart support?
+A: Email: support@techmart.com | Phone: 1-800-TECHMART | Hours: Mon-Sat 9AM-6PM IST
+
+Q: Where is TechMart located?
+A: TechMart is headquartered in Bangalore, India with warehouses in Mumbai, Delhi, and Chennai.
+
+Q: Does TechMart ship internationally?
+A: Yes, TechMart ships to 25 countries. International shipping takes 7-14 business days.
+
+Q: What payment methods does TechMart accept?
+A: Credit/Debit cards, UPI, Net Banking, EMI, PayTM, PhonePe, Google Pay, and Cash on Delivery.
+
+Q: Is my payment information secure?
+A: Yes. TechMart uses 256-bit SSL encryption and is PCI-DSS compliant.
+
+Q: Does TechMart offer EMI?
+A: Yes, 0% EMI available on orders above Rs. 5000 for 3, 6, and 12 months via HDFC, ICICI, SBI, and Axis Bank.

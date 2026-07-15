@@ -1,0 +1,28 @@
+TechMart Electronics - Product Pricing Guide
+
+LAPTOPS:
+- Budget (Rs. 25,000-40,000): Lenovo IdeaPad, HP 15, Dell Inspiron
+- Mid-Range (Rs. 40,000-70,000): ASUS VivoBook, Acer Swift, HP Pavilion
+- Premium (Rs. 70,000+): MacBook Air, Dell XPS, HP Spectre
+
+SMARTPHONES:
+- Budget (Rs. 8,000-15,000): Redmi Note, Realme, Samsung M series
+- Mid-Range (Rs. 15,000-35,000): OnePlus Nord, Samsung A series, Poco
+- Premium (Rs. 35,000+): iPhone, Samsung S series, OnePlus flagship
+
+ACCESSORIES:
+- Earbuds: Rs. 999-15,000
+- Laptop Bags: Rs. 499-3,999
+- Phone Cases: Rs. 199-1,999
+- Chargers: Rs. 299-2,999
+- Keyboards/Mouse: Rs. 499-5,999
+
+SMART HOME:
+- Smart Speakers: Rs. 2,999-8,999
+- Smart Bulbs: Rs. 699-1,999
+- Security Cameras: Rs. 1,999-8,999
+- Smart Plugs: Rs. 499-1,499
+
+MEMBERSHIP PLANS:
+- TechMart Plus: Rs. 299/month (Free express delivery + 5% cashback)
+- TechMart Pro: Rs. 599/month (All Plus benefits + priority support + extended warranty)

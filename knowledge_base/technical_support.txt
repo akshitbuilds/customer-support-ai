@@ -1,0 +1,28 @@
+TechMart Electronics - Technical Support Guide
+
+COMMON LOGIN ISSUES:
+- Forgot password: Click "Forgot Password" on login page, OTP sent to registered mobile
+- Account locked: After 5 failed attempts, account locked for 30 minutes
+- Two-factor authentication: Settings > Security > Enable 2FA
+
+APP INSTALLATION GUIDE:
+- Android: Download from Google Play Store, search "TechMart"
+- iOS: Download from App Store, search "TechMart"
+- Minimum requirements: Android 8.0+ or iOS 13.0+
+- App size: 45MB Android, 52MB iOS
+
+ORDER RELATED ISSUES:
+- Order not showing: Check registered email/mobile, allow 10 minutes after placing
+- Payment deducted but order not placed: Amount auto-refunded in 24-48 hours
+- Unable to apply coupon: Check expiry date and minimum order value
+
+DEVICE SETUP HELP:
+- Laptop setup: techmart.com/setup/laptop
+- Smartphone transfer: Use TechMart Transfer app for data migration
+- Smart home setup: Follow QR code in package or visit techmart.com/smarthome
+
+ERROR CODES:
+- Error 404: Page not found, clear browser cache
+- Error 500: Server issue, try after 10 minutes
+- Payment Error PE001: Card declined, contact your bank
+- Payment Error PE002: UPI timeout, check UPI app and retry
