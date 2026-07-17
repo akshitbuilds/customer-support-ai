@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 from agents.router import detect_intent
 from agents.agents import run_agents, combine_responses
-from database import init_db, save_message, get_conversation_history, get_all_sessions
+from database import init_db, save_message, get_conversation_history, get_all_sessions, create_user, verify_user
 
 load_dotenv()
 
@@ -52,6 +52,9 @@ class ChatResponse(BaseModel):
     session_id: str       # Session ID for continuing conversation
     agents_used: list     # Which agents handled this query
     message_count: int    # Total messages in this session
+class AuthRequest(BaseModel):
+    username: str
+    password: str
 
 class HistoryResponse(BaseModel):
     session_id: str
@@ -154,3 +157,19 @@ def health_check():
             "llm": "groq/llama-3.3-70b-versatile"
         }
     }
+@app.post("/register")
+def register(request: AuthRequest):
+    """Register a new user. Fails if username already taken."""
+    if len(request.username.strip()) < 3 or len(request.password) < 4:
+        raise HTTPException(status_code=400, detail="Username must be 3+ chars, password 4+ chars")
+    success = create_user(request.username.strip(), request.password)
+    if not success:
+        raise HTTPException(status_code=400, detail="Username already exists")
+    return {"status": "success", "message": "User registered"}
+
+@app.post("/login")
+def login(request: AuthRequest):
+    """Verify login credentials."""
+    if verify_user(request.username.strip(), request.password):
+        return {"status": "success", "username": request.username.strip()}
+    raise HTTPException(status_code=401, detail="Invalid username or password")

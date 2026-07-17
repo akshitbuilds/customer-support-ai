@@ -37,6 +37,14 @@ def init_db():
             timestamp TEXT NOT NULL
         )
     """)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        )
+    """)
     conn.commit()
     conn.close()
     print("Database initialized successfully")
@@ -114,3 +122,41 @@ if __name__ == "__main__":
         print(f"  [{msg['role']}]: {msg['message']}")
     
     print("Database working correctly!")
+
+import bcrypt
+
+def create_user(username: str, password: str) -> bool:
+    """
+    Register a new user. Returns True on success, False if username
+    already exists. Password is hashed with bcrypt before storage —
+    plaintext passwords are never saved.
+    """
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    try:
+        password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        cursor.execute("""
+            INSERT INTO users (username, password_hash, created_at)
+            VALUES (?, ?, ?)
+        """, (username, password_hash, datetime.now().isoformat()))
+        conn.commit()
+        return True
+    except sqlite3.IntegrityError:
+        # username already exists (UNIQUE constraint failed)
+        return False
+    finally:
+        conn.close()
+
+def verify_user(username: str, password: str) -> bool:
+    """
+    Check login credentials. Returns True if username exists and
+    password matches its stored hash.
+    """
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT password_hash FROM users WHERE username = ?", (username,))
+    row = cursor.fetchone()
+    conn.close()
+    if row is None:
+        return False
+    return bcrypt.checkpw(password.encode(), row[0].encode())

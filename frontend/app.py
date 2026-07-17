@@ -54,25 +54,59 @@ AGENT_COLORS = {
     "complaint": "#EF4444",   # red
     "faq": "#10B981",         # green
 }
-# --- Minimal login gate ---
-# Full auth (registration, password hashing, JWT) is out of scope for this
-# project's timeline. This satisfies session identification per Module 1
-# while keeping the actual security work honestly scoped in the report.
-if "user_name" not in st.session_state:
-    st.session_state.user_name = None
-
-if not st.session_state.user_name:
-    name_input = st.text_input("Your name")
-    if st.button("Start Session") and name_input.strip():
-        st.session_state.user_name = name_input.strip()
-        st.rerun()
-    st.stop()  # halts execution here until a name is provided
 def render_agent_badges(agents):
     badges_html = ""
     for agent in agents:
         color = AGENT_COLORS.get(agent.lower(), "#6B7280")  # gray fallback for unknown agents
         badges_html += f'<span class="agent-badge" style="background-color:{color}">{agent.upper()}</span>'
     st.markdown(badges_html, unsafe_allow_html=True)
+# --- Minimal login gate ---
+# Full auth (registration, password hashing, JWT) is out of scope for this
+# project's timeline. This satisfies session identification per Module 1
+# while keeping the actual security work honestly scoped in the report.
+# --- Login / Register gate ---
+if "user_name" not in st.session_state:
+    st.session_state.user_name = None
+
+if not st.session_state.user_name:
+    tab_login, tab_register = st.tabs(["Login", "Register"])
+
+    with tab_login:
+        login_user = st.text_input("Username", key="login_user")
+        login_pass = st.text_input("Password", type="password", key="login_pass")
+        if st.button("Login"):
+            try:
+                r = requests.post(
+                    "http://127.0.0.1:8000/login",  # update this to your deployed backend URL later
+                    json={"username": login_user, "password": login_pass},
+                    timeout=10
+                )
+                if r.status_code == 200:
+                    st.session_state.user_name = login_user
+                    st.rerun()
+                else:
+                    st.error(r.json().get("detail", "Login failed"))
+            except requests.exceptions.ConnectionError:
+                st.error("⚠️ Could not connect to the backend.")
+
+    with tab_register:
+        reg_user = st.text_input("Choose a username", key="reg_user")
+        reg_pass = st.text_input("Choose a password", type="password", key="reg_pass")
+        if st.button("Register"):
+            try:
+                r = requests.post(
+                    "http://127.0.0.1:8000/register",
+                    json={"username": reg_user, "password": reg_pass},
+                    timeout=10
+                )
+                if r.status_code == 200:
+                    st.success("Registered! Please log in above.")
+                else:
+                    st.error(r.json().get("detail", "Registration failed"))
+            except requests.exceptions.ConnectionError:
+                st.error("⚠️ Could not connect to the backend.")
+
+    st.stop()   
 
 # --- Session state initialization ---
 # Streamlit reruns the entire script top-to-bottom on every interaction,
