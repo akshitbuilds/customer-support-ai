@@ -11,3 +11,5 @@ faiss-cpu
 numpy
 streamlit
 requests
+bcrypt
+pandas
